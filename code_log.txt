@@ -1,0 +1,18 @@
+2025-02-04 09:19:17,991 - INFO - ETL Process Started
+2025-02-04 09:19:17,991 - INFO - Starting data extraction from Wikipedia
+2025-02-04 09:19:17,992 - INFO - Making HTTP request to Wikipedia
+2025-02-04 09:19:18,910 - INFO - Locating market capitalization table
+2025-02-04 09:19:18,915 - INFO - Target table found - processing data
+2025-02-04 09:19:18,933 - INFO - Available columns: ['Rank', 'Bank name', 'Market cap (US$ billion)']
+2025-02-04 09:19:18,937 - INFO - Data extraction completed successfully
+2025-02-04 09:19:18,939 - INFO - Starting data transformation
+2025-02-04 09:19:18,940 - INFO - Reading exchange rates from exchange_rate.csv
+2025-02-04 09:19:18,943 - INFO - Exchange rates loaded successfully: EUR=0.93, GBP=0.8, INR=82.95
+2025-02-04 09:19:18,945 - INFO - Data transformation completed successfully
+2025-02-04 09:19:18,946 - INFO - Starting CSV file export
+2025-02-04 09:19:18,950 - INFO - Data successfully exported to Largest_banks_data.csv
+2025-02-04 09:19:18,950 - INFO - Starting database loading process
+2025-02-04 09:19:19,308 - INFO - Data successfully loaded to Banks.db
+2025-02-04 09:19:19,309 - INFO - Starting database queries
+2025-02-04 09:19:19,326 - INFO - Database queries completed successfully
+2025-02-04 09:19:19,327 - INFO - ETL Process Completed Successfully
