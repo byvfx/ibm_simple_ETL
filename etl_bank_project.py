@@ -245,8 +245,12 @@ def main():
         df_transformed = transform(df)
         
         if df_transformed is not None:
-            db_success = load_to_db(df_transformed)
+            # Call load_to_csv to save the CSV file
+            csv_success = load_to_csv(df_transformed)
+            if not csv_success:
+                log_progress("Error: CSV export failed")
             
+            db_success = load_to_db(df_transformed)
             if db_success:
                 run_queries()
             
