@@ -1,4 +1,4 @@
-# Simple ETL Project
+# Simple Banking ETL Project
 
 This project demonstrates a simple ETL process to extract data from a Wikipedia page, transform it with exchange rates, and load it into both a CSV file and an SQLite database.
 
@@ -33,7 +33,6 @@ def transform(df):
 ### Loading
 - Saves the transformed data into a CSV file.
 - Loads the data into a SQLite database named `Banks.db`.
-- SQL queries are run to analyze the data.
 - Example snippet:
 ```python
 # Main function snippet
@@ -43,6 +42,40 @@ def main():
     if df is not None:
         df_transformed = transform(df)
         # ...existing loading code...
+```
+
+## SQL Queries
+
+Below are the SQL queries used for data analysis:
+
+```sql
+-- Query 1: Market Cap Analysis
+SELECT 
+    ROUND(AVG(MC_EUR_Billion), 2) as Average_MC_EUR,
+    ROUND(MAX(MC_EUR_Billion), 2) as Max_MC_EUR,
+    ROUND(MIN(MC_EUR_Billion), 2) as Min_MC_EUR,
+    ROUND(MAX(MC_EUR_Billion) / MIN(MC_EUR_Billion), 2) as Max_to_Min_Ratio
+FROM Largest_banks;
+
+-- Query 2: Average by Currency
+SELECT 
+    ROUND(AVG(MC_EUR_Billion), 2) as Avg_EUR,
+    ROUND(AVG(MC_USD_Billion), 2) as Avg_USD,
+    ROUND(AVG(MC_GBP_Billion), 2) as Avg_GBP,
+    ROUND(AVG(MC_INR_Billion), 2) as Avg_INR
+FROM Largest_banks;
+
+-- Query 3: Bank Size Comparison
+WITH max_cap AS (
+    SELECT MAX(MC_EUR_Billion) as max_mc
+    FROM Largest_banks
+)
+SELECT 
+    Name,
+    MC_EUR_Billion,
+    ROUND(MC_EUR_Billion / max_mc * 100, 2) as Percent_of_Largest
+FROM Largest_banks, max_cap
+ORDER BY MC_EUR_Billion DESC;
 ```
 
 ## Logging and Verification
